@@ -3,7 +3,7 @@ import SwiftUI
 struct DetailView: View {
     let asset: AssetDefinition
     @EnvironmentObject private var store: MarketStore
-    @State private var timeframe: Timeframe = .day
+    @State private var timeframe: Timeframe = .fiveMinutes
     @State private var snapshot: QuoteSnapshot?
     @State private var isLoading = false
     @State private var errorMessage: String?

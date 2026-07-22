@@ -33,6 +33,7 @@ struct QuoteSnapshot: Identifiable, Codable, Sendable {
 }
 
 enum Timeframe: String, CaseIterable, Identifiable {
+    case fiveMinutes
     case day
     case week
     case month
@@ -43,6 +44,7 @@ enum Timeframe: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
+        case .fiveMinutes: "5分"
         case .day: "1日"
         case .week: "1周"
         case .month: "1月"
@@ -53,7 +55,8 @@ enum Timeframe: String, CaseIterable, Identifiable {
 
     var interval: String {
         switch self {
-        case .day: "5m"
+        case .fiveMinutes: "5m"
+        case .day: "15m"
         case .week: "30m"
         case .month, .threeMonths: "1d"
         case .year: "1wk"
@@ -62,7 +65,7 @@ enum Timeframe: String, CaseIterable, Identifiable {
 
     var range: String {
         switch self {
-        case .day: "1d"
+        case .fiveMinutes, .day: "1d"
         case .week: "5d"
         case .month: "1mo"
         case .threeMonths: "3mo"
@@ -70,4 +73,3 @@ enum Timeframe: String, CaseIterable, Identifiable {
         }
     }
 }
-

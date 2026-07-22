@@ -22,6 +22,7 @@
 		A0000000000000000000000D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000D /* SettingsView.swift */; };
 		A0000000000000000000000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000E /* Assets.xcassets */; };
 		A0000000000000000000000F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B0000000000000000000000F /* PrivacyInfo.xcprivacy */; };
+		A00000000000000000000010 /* SymbolSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00000000000000000000011 /* SymbolSearchService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		B0000000000000000000000E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0000000000000000000000F /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		B00000000000000000000010 /* JianPan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JianPan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B00000000000000000000011 /* SymbolSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolSearchService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +81,7 @@
 		C00000000000000000000003 /* App */ = {isa = PBXGroup; children = (B00000000000000000000001 /* JianPanApp.swift */,); path = App; sourceTree = "<group>"; };
 		C00000000000000000000004 /* Design */ = {isa = PBXGroup; children = (B00000000000000000000002 /* Theme.swift */,); path = Design; sourceTree = "<group>"; };
 		C00000000000000000000005 /* Models */ = {isa = PBXGroup; children = (B00000000000000000000003 /* Market.swift */, B00000000000000000000004 /* Quote.swift */,); path = Models; sourceTree = "<group>"; };
-		C00000000000000000000006 /* Network */ = {isa = PBXGroup; children = (B00000000000000000000005 /* YahooMarketService.swift */,); path = Network; sourceTree = "<group>"; };
+		C00000000000000000000006 /* Network */ = {isa = PBXGroup; children = (B00000000000000000000005 /* YahooMarketService.swift */, B00000000000000000000011 /* SymbolSearchService.swift */,); path = Network; sourceTree = "<group>"; };
 		C00000000000000000000007 /* Stores */ = {isa = PBXGroup; children = (B00000000000000000000006 /* MarketStore.swift */,); path = Stores; sourceTree = "<group>"; };
 		C00000000000000000000008 /* Views */ = {
 			isa = PBXGroup;
@@ -180,6 +182,7 @@
 				A0000000000000000000000B /* DetailView.swift in Sources */,
 				A0000000000000000000000C /* AddSymbolView.swift in Sources */,
 				A0000000000000000000000D /* SettingsView.swift in Sources */,
+				A00000000000000000000010 /* SymbolSearchService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +205,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jianpan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -229,7 +232,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jianpan.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -308,4 +311,3 @@
 	};
 	rootObject = E00000000000000000000002 /* Project object */;
 }
-

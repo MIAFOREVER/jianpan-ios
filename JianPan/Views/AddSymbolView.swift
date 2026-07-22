@@ -5,21 +5,32 @@ struct AddSymbolView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var query = ""
     @State private var customMarket: Market = .aShare
+    @State private var remoteMatches: [AssetDefinition] = []
+    @State private var isSearching = false
+    private let searchService = SymbolSearchService()
+
+    private var canAddCustomCode: Bool {
+        let code = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        return !code.isEmpty
+            && code.range(of: #"^[A-Za-z0-9.^/\-]+$"#, options: .regularExpression) != nil
+    }
 
     private var matches: [AssetDefinition] {
         guard !query.isEmpty else { return AssetCatalog.all }
         let needle = query.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current)
-        return AssetCatalog.all.filter { asset in
+        let localMatches = AssetCatalog.all.filter { asset in
             asset.name.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: .current).contains(needle)
                 || asset.symbol.localizedCaseInsensitiveContains(needle)
                 || asset.displaySymbol.localizedCaseInsensitiveContains(needle)
         }
+        var seen = Set<String>()
+        return (localMatches + remoteMatches).filter { seen.insert($0.id).inserted }
     }
 
     var body: some View {
         NavigationStack {
             List {
-                if !query.isEmpty {
+                if canAddCustomCode {
                     Section("自定义代码") {
                         HStack {
                             Picker("市场", selection: $customMarket) {
@@ -85,6 +96,15 @@ struct AddSymbolView: View {
             .scrollContentBackground(.hidden)
             .background(JPTheme.background)
             .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "名称或代码")
+            .overlay(alignment: .topTrailing) {
+                if isSearching {
+                    ProgressView()
+                        .controlSize(.small)
+                        .tint(JPTheme.primaryText)
+                        .padding(.top, 14)
+                        .padding(.trailing, 22)
+                }
+            }
             .navigationTitle("添加行情")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -94,8 +114,19 @@ struct AddSymbolView: View {
                 }
             }
             .toolbarColorScheme(.dark, for: .navigationBar)
+            .task(id: query) {
+                remoteMatches = []
+                guard query.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2 else { return }
+                do {
+                    try await Task.sleep(for: .milliseconds(350))
+                    isSearching = true
+                    remoteMatches = await searchService.search(query: query)
+                    isSearching = false
+                } catch {
+                    isSearching = false
+                }
+            }
         }
         .preferredColorScheme(.dark)
     }
 }
-

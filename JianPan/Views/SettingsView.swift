@@ -44,7 +44,7 @@ struct SettingsView: View {
                 }
 
                 Section {
-                    LabeledContent("版本", value: "1.0.0")
+                    LabeledContent("版本", value: "1.1.0")
                     LabeledContent("开源协议", value: "MIT")
                 }
             }
@@ -63,4 +63,3 @@ struct SettingsView: View {
         .preferredColorScheme(.dark)
     }
 }
-
