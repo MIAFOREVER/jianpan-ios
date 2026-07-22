@@ -142,4 +142,3 @@ private struct YahooSearchQuote: Decodable {
     let symbol: String
     let longname: String?
 }
-
