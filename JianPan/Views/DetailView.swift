@@ -14,16 +14,21 @@ struct DetailView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
-                priceHeader
-                timeframePicker
-                chartCard
-                sessionCard
-                sourceNote
+        GeometryReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    priceHeader
+                        .padding(.horizontal, 18)
+                    timeframePicker
+                        .padding(.horizontal, 18)
+                    chartPanel(height: max(440, proxy.size.height * 2 / 3))
+                    sessionCard
+                        .padding(.horizontal, 18)
+                    sourceNote
+                        .padding(.horizontal, 18)
+                }
+                .padding(.bottom, 36)
             }
-            .padding(.horizontal, 18)
-            .padding(.bottom, 36)
         }
         .background(JPTheme.background.ignoresSafeArea())
         .navigationTitle(asset.name)
@@ -89,7 +94,7 @@ struct DetailView: View {
         .background(JPTheme.surface, in: Capsule())
     }
 
-    private var chartCard: some View {
+    private func chartPanel(height: CGFloat) -> some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
                 Text("价格走势")
@@ -98,25 +103,29 @@ struct DetailView: View {
                 Spacer()
                 if isLoading { ProgressView().controlSize(.small).tint(JPTheme.primaryText) }
             }
+            .padding(.horizontal, 18)
 
             if let snapshot, snapshot.candles.count > 1 {
                 CandlestickChart(
                     candles: snapshot.candles,
                     timeZoneIdentifier: snapshot.marketTimeZone
                 )
-                    .frame(height: 290)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: height)
             } else if let errorMessage {
                 ContentUnavailableView("暂时无法加载", systemImage: "wifi.exclamationmark", description: Text(errorMessage))
-                    .frame(height: 260)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: height)
             } else {
                 ProgressView()
                     .tint(JPTheme.primaryText)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 260)
+                    .frame(height: height)
             }
         }
-        .padding(16)
-        .jpCard()
+        .padding(.vertical, 16)
+        .frame(maxWidth: .infinity)
+        .background(JPTheme.surface)
     }
 
     private var sessionCard: some View {
