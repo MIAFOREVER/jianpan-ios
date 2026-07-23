@@ -15,6 +15,7 @@
 - 下拉刷新与本地行情缓存
 - 无登录、无广告、无埋点
 - 深色原生 SwiftUI 界面，支持 iPhone
+- TradingView Lightweight Charts 交互式 K 线，支持缩放、拖动、十字线与成交量
 
 ## 安装到 iPhone
 
@@ -27,9 +28,10 @@
 
 ## 技术说明
 
-- SwiftUI + Swift Charts
+- SwiftUI + WebKit
+- K 线使用 TradingView Lightweight Charts 5.2.0（Apache-2.0），组件随 App 本地打包
 - 最低系统：iOS 17
-- 无第三方依赖
+- 无远程运行时依赖，图表组件随 App 本地打包
 - 行情层集中在 `YahooMarketService`，便于替换成持牌/商业数据源
 - 标的搜索由本地中文名称、腾讯证券联想与 Yahoo Finance 搜索合并去重
 - 自选与最近行情只保存在本机 `UserDefaults`
@@ -49,4 +51,6 @@
 
 ## License
 
-MIT
+App 源码采用 MIT 协议。内置的 TradingView Lightweight Charts 采用 Apache-2.0 协议：
+
+> TradingView Lightweight Charts™ Copyright (с) 2025 TradingView, Inc. https://www.tradingview.com/

@@ -99,8 +99,11 @@ struct DetailView: View {
                 if isLoading { ProgressView().controlSize(.small).tint(JPTheme.primaryText) }
             }
 
-            if let candles = snapshot?.candles, candles.count > 1 {
-                CandlestickChart(candles: candles)
+            if let snapshot, snapshot.candles.count > 1 {
+                CandlestickChart(
+                    candles: snapshot.candles,
+                    timeZoneIdentifier: snapshot.marketTimeZone
+                )
                     .frame(height: 290)
             } else if let errorMessage {
                 ContentUnavailableView("暂时无法加载", systemImage: "wifi.exclamationmark", description: Text(errorMessage))

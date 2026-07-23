@@ -45,7 +45,13 @@ struct SettingsView: View {
 
                 Section {
                     LabeledContent("版本", value: "1.1.0")
-                    LabeledContent("开源协议", value: "MIT")
+                    LabeledContent("开源协议", value: "MIT · Apache-2.0")
+                    Link(destination: URL(string: "https://www.tradingview.com/")!) {
+                        Label("图表由 TradingView 提供", systemImage: "chart.xyaxis.line")
+                    }
+                    Text("TradingView Lightweight Charts™ Copyright (с) 2025 TradingView, Inc.")
+                        .font(.caption2)
+                        .foregroundStyle(JPTheme.secondaryText)
                 }
             }
             .scrollContentBackground(.hidden)
